@@ -1,5 +1,20 @@
 import express from "express";
+
 import indexRoutes from "./routes/index-routes.js";
+import connectInDatabase from "./config/db-connect.js";
+
+// Recuperando a conexão
+const conexao = await connectInDatabase();
+
+// Tratamento para eventual erro de conexão
+conexao.on('error', (erro) => {
+    console.error('Erro de conexão', erro);
+});
+
+// Tratamento para conexão bem sucedida
+conexao.once('open', () => {
+    console.log('Conexão com o banco de dados estabelecida com sucesso!');
+});
 
 // Instanciação do Express.
 const app = express();
