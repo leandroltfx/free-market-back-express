@@ -8,6 +8,7 @@ const productsSchema = new mongoose.Schema({
     name: { type: String, required: true },
     description: { type: String },
     price: { type: Number },
+    user: { type: mongoose.Schema.Types.ObjectId, ref: 'users', required: true }, // referencing
 }, { versionKey: false });
 
 // O primeiro parâmetro se refere a collection definida (ou a ser criada) no MongoDB Atlas
