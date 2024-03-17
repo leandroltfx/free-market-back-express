@@ -1,4 +1,4 @@
-import { productModel } from '../models/product-model.js'
+import productModel from '../models/product-model.js'
 
 // Controllers são a camada intermediária entre o endpoint e a base de dados
 class ProductController {
