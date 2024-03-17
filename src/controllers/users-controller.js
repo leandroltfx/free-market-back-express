@@ -8,7 +8,7 @@ class UsersController {
     static async createUser(req, res) {
         try {
             const newUser = await userModel.create(req.body);
-            res.status(201).json({ message: `Usuário ${newUser.userName} cadastrado com sucesso`, user: newUser });
+            res.status(201).json({ message: `Usuário ${newUser.name} cadastrado com sucesso`, user: newUser });
         } catch (erro) {
             res.status(500).json({ message: `${erro.message} - falha no cadastro de usuário` });
         }
