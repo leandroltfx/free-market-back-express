@@ -17,10 +17,14 @@ class ProductController {
 
     static async createProduct(req, res) {
         try {
-            await userModel.findById(req.params.userId);
-            const newProduct = { ...req.body, user: req.params.userId };
-            const productCreate = await productModel.create(newProduct);
-            res.status(201).json({ message: `Produto ${productCreate.name} cadastrado com sucesso!`, data: productCreate });
+            const user = await userModel.findById(req.params.userId);
+            if (user) {
+                const newProduct = { ...req.body, user: req.params.userId };
+                const productCreate = await productModel.create(newProduct);
+                res.status(201).json({ message: `Produto ${productCreate.name} cadastrado com sucesso!`, data: productCreate });
+            } else {
+                res.status(404).json({ message: `Usuário inválido.` });
+            }
         } catch (error) {
             res.status(500).json({ message: `${error.message} - falha no cadastro do produto` });
         }
